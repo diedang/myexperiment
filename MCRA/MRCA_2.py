@@ -131,7 +131,7 @@ class MRCA_1(Network_alg):
     def show_consensus(self, iter_time):
         x = range(iter_time)
         plt.figure(time.time())
-        plt.title('MRCA with attacks')
+        plt.title('SDA with attacks II')
         plt.plot(x, self.D)
         plt.legend()
         plt.savefig('doc/result2.png')

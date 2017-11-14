@@ -2,7 +2,7 @@
 import random
 import time
 
-from Graph3 import Network_alg
+from Graph_4 import Network_alg
 import matplotlib.pyplot as plt
 
 class MRCA_1(Network_alg):
@@ -52,7 +52,7 @@ class MRCA_1(Network_alg):
 
 
         if v in self.malicious_node1:
-            self.G.nodes[v]['state'].append((neighbors_max_values+neighbors_min_values)*1.0/2 + 3)
+            self.G.nodes[v]['state'].append((neighbors_max_values+neighbors_min_values)*1.0/2 + 1)
         else:
             self.G.nodes[v]['state'].append((neighbors_max_values + neighbors_min_values) * 1.0 / 2)
         self.G.nodes[v]['neih'].append(neighbors_min_values)
@@ -61,7 +61,45 @@ class MRCA_1(Network_alg):
         self.G.nodes[v]['neiHid'].append(neighbors_max_id)
 
         if v in self.malicious_node1:
-            pass
+            th = random.randint(0,100)
+            if th < 20:
+                if self.G.nodes[v]['id'] == neighbors_min_id and neighbors_min_id != neighbors_max_id:
+                    if self.G.nodes[neighbors_min_id]['state'][iter_time] == self.G.nodes[v]['state'][iter_time] and \
+                                    self.G.nodes[v]['state'][iter_time + 1] == (
+                                neighbors_max_values + neighbors_min_values) * 1.0 / 2:
+                        pass
+                    else:
+                        if v in self.malicious_node:
+                            pass
+                        else:
+                            self.malicious_node.append(v)
+                            print '%d is a malicious node' % v
+                            print iter_time
+
+                if self.G.nodes[v]['id'] == neighbors_max_id and neighbors_min_id != neighbors_max_id:
+                    if self.G.nodes[neighbors_max_id]['state'][iter_time] == self.G.nodes[v]['state'][iter_time] and \
+                                    self.G.nodes[v]['state'][iter_time + 1] == (
+                                        neighbors_max_values + neighbors_min_values) * 1.0 / 2:
+                        pass
+                    else:
+                        if v in self.malicious_node:
+                            pass
+                        else:
+                            self.malicious_node.append(v)
+                            print '%d is a malicious node' % v
+                            print iter_time
+
+                if self.G.nodes[v]['id'] != neighbors_min_id and self.G.nodes[v]['id'] != neighbors_max_id:
+                    if self.G.nodes[v]['state'][iter_time + 1] == (
+                        neighbors_max_values + neighbors_min_values) * 1.0 / 2:
+                        pass
+                    else:
+                        if v in self.malicious_node:
+                            pass
+                        else:
+                            self.malicious_node.append(v)
+                            print '%d is a malicious node' % v
+                            print iter_time
         else:
             if self.G.nodes[v]['id'] == neighbors_min_id and neighbors_min_id != neighbors_max_id:
                 if self.G.nodes[neighbors_min_id]['state'][iter_time] == self.G.nodes[v]['state'][iter_time] and \
@@ -122,10 +160,10 @@ class MRCA_1(Network_alg):
     def show_consensus(self, iter_time):
         x = range(iter_time)
         plt.figure(time.time())
-        plt.title('SDA with two attacks')
+        plt.title('MRCA with two attacks')
         plt.plot(x, self.D)
         plt.legend()
-        plt.savefig('doc/result3.png')
+        plt.savefig('doc/result4.png')
         plt.show()
 
 

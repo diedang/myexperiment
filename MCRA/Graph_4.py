@@ -81,7 +81,7 @@ class Network_alg(object):
         pos = x
         nx.draw_networkx_labels(self.G,pos, node_labels=node_labels)
         nx.draw(self.G, pos, node_size=100, node_color = colors)
-        plt.savefig('doc/network_graph3.png')
+        plt.savefig('doc/network_graph4.png')
         plt.show()
 
 if __name__ == '__main__':
